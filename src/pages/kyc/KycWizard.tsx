@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { WizardTabs, WizardStep } from '../../components/WizardTabs';
 import { Button } from '../../components/ui/button';
+import { WelcomeModal } from '../../components/WelcomeModal';
 import { Step01MainInformation } from './steps/Step01MainInformation';
 import { Step02CompanyPrincipals } from './steps/Step02CompanyPrincipals';
 import { Step03ComplianceRiskCheck } from './steps/Step03ComplianceRiskCheck';
@@ -44,6 +45,7 @@ const wizardSteps: WizardStep[] = [
 export function KycWizard() {
   const [currentStep, setCurrentStep] = useState('main-information');
   const [steps, setSteps] = useState(wizardSteps);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
   const currentStepIndex = steps.findIndex(step => step.id === currentStep);
   const isLastStep = currentStepIndex === steps.length - 1;
@@ -85,6 +87,10 @@ export function KycWizard() {
     }
   };
 
+  const handleWelcomeAccept = () => {
+    setShowWelcomeModal(false);
+  };
+
   const stepProps = {
     onNext: handleNext,
     onPrevious: handlePrevious,
@@ -112,12 +118,19 @@ export function KycWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 mt-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <WelcomeModal
+        open={showWelcomeModal}
+        onOpenChange={setShowWelcomeModal}
+        onAccept={handleWelcomeAccept}
+      />
+      
+      <div className="min-h-screen bg-gray-50 py-8 ">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
         {/* Wizard Progress */}
-        <div className="mb-8">
+        <div className="mb-8 mt-8">
           <WizardTabs
             steps={steps}
             currentStep={currentStep}
@@ -152,7 +165,8 @@ export function KycWizard() {
             {isLastStep ? 'Submit Application' : 'Next'}
           </Button>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
