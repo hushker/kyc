@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.css'
+import { WelcomeModal } from './components/WelcomeModal'
 
 function App() {
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true)
+
+  const handleWelcomeModalAccept = () => {
+    console.log('User accepted the welcome modal')
+    // Here you can add logic to proceed with the application
+  }
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="max-w-md w-full space-y-8">
@@ -33,6 +41,13 @@ function App() {
           </p>
         </div>
       </div>
+
+      {/* Welcome Modal */}
+      <WelcomeModal 
+        open={showWelcomeModal}
+        onOpenChange={setShowWelcomeModal}
+        onAccept={handleWelcomeModalAccept}
+      />
     </div>
   )
 }
