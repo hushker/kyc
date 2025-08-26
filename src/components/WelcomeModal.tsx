@@ -8,6 +8,7 @@ import {
 import { Button } from './ui/button'
 import { Card } from './ui/card'
 import { FileText } from 'lucide-react'
+import logoImage from '../assets/logo-6122af.png'
 
 interface WelcomeModalProps {
   open: boolean
@@ -74,12 +75,16 @@ Open Mineral AG`
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl w-full max-h-[90vh] overflow-y-auto bg-white rounded-[32px] border border-gray-200 p-10">
+      <DialogContent className="max-w-6xl w-full max-h-[90vh] overflow-y-auto bg-white rounded-[32px] border border-gray-200 p-8">
         {/* Header Section */}
         <div className="flex flex-col items-center gap-5 w-full">
-          {/* Logo/Image placeholder */}
-          <div className="w-[108px] h-[60px] bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
-            <span className="text-sm font-medium text-blue-800">Logo</span>
+          {/* Logo */}
+          <div className="w-[108px] h-[60px] flex items-center justify-center">
+            <img 
+              src={logoImage} 
+              alt="Open Mineral Logo" 
+              className="max-w-full max-h-full object-contain"
+            />
           </div>
           
           {/* Page Header */}
@@ -93,9 +98,9 @@ Open Mineral AG`
         </div>
 
         {/* Main Content */}
-        <div className="flex gap-8 w-full">
+        <div className="flex gap-8 w-full justify-center">
           {/* Left Side - Application Flow */}
-          <div className="flex-1">
+          <div className="flex-1 max-w-[480px]">
             <Card className="p-6 border border-gray-200 rounded-[24px]">
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-gray-900">Application flow</h3>
@@ -156,14 +161,14 @@ Open Mineral AG`
           </div>
 
           {/* Right Side - Confirmation Note */}
-          <div className="w-[480px]">
-            <Card className="p-6 h-full border border-gray-200 rounded-[24px] flex flex-col">
+          <div className="flex-1 max-w-[420px]">
+            <Card className="p-6 border border-gray-200 rounded-[24px] flex flex-col min-h-[600px]">
               <div className="flex-1">
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-900">Confirmation note</h3>
                 </div>
                 
-                <div className="mb-16">
+                <div className="mb-8">
                   <p className="text-sm text-gray-600 leading-5 whitespace-pre-line">
                     {confirmationText}
                   </p>
@@ -171,7 +176,7 @@ Open Mineral AG`
               </div>
               
               {/* CTA Section */}
-              <div className="space-y-3">
+              <div className="space-y-3 mt-auto">
                 <Button 
                   onClick={handleAccept}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base py-3 h-auto rounded-lg shadow-sm border-2 border-transparent hover:border-blue-800 transition-all duration-200"
